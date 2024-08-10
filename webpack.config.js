@@ -5,10 +5,10 @@ module.exports = {
   mode: 'development',
   entry: {
     index: './src/index.js',
-    ship: './src/ship.js',
+    constructors: './src/constructors.js',
     test: './src/battleship.test.js',
-    you : './src/yourboard.js',
-    computer: './src/computerboard.js'
+    yourboard : './src/yourboard.js',
+    computerfboard: './src/computerboard.js',
   },
   devtool: 'inline-source-map',
   plugins: [
