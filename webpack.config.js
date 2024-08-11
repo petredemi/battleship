@@ -7,8 +7,8 @@ module.exports = {
     index: './src/index.js',
     constructors: './src/constructors.js',
     test: './src/battleship.test.js',
-    yourboard : './src/yourboard.js',
-    computerfboard: './src/computerboard.js',
+    you : './src/you.js',
+    computer: './src/computer.js',
   },
   devtool: 'inline-source-map',
   plugins: [

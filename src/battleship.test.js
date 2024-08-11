@@ -1,4 +1,4 @@
-//i//mport {ship1, addShip } from './constructors.js';
+import {ship1, addShip } from './constructors.js';
 //
 //
 //  test.skip('add ship on the board', () =>{

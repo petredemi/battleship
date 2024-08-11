@@ -1,6 +1,8 @@
 import { add, indexOf } from 'lodash';
 /**@type {import('jest').Config}*/
-export  {addShip, Ship, Gameboard, checkSpaceAvailable, yourHit, computerHit};//class Ship{
+export  {addShip, Ship, Gameboard, checkSpaceAvailable, yourHit, computerHit,
+    checkShipsOnBoard
+};//class Ship{
     
 class Ship{
     constructor(length, hit, sunk, name){
@@ -10,7 +12,7 @@ class Ship{
             this.name = name;
         }
         hit(){
-            if(this.hit = this.length ){
+            if(this.hit == this.length ){
                 return this.hit  = this.hit + 1;
             }
         }
@@ -42,8 +44,27 @@ const ship1  = new Ship(3 , 0, false, 'M');
 const ship2 = new Ship(2, 0, false, 'L');
 const  bd1 = [[0,0,0,0],
              [0,0,0,0],
-             [0,0,0,0],
-             [0,0,0,0]];
+             [0,0 ,0,0],
+             [0,0 ,0,0]];
+
+function checkShipsOnBoard(board){    
+    let numberOfShips = 0;         
+    for( let i = 0; i < board[0].length ; i++){
+        for(let j = 0; j < board[0].length; j++){
+           if (typeof board[i][j] == 'object'){
+                    numberOfShips = numberOfShips + 1;
+           };
+        }
+    }
+        if( numberOfShips == 0){
+            return 'no more ships';
+        }else{
+        return'  ' + numberOfShips;
+        }
+            
+}
+//checkShipsOnBoard(bd1);
+
 export default bd1;//function checkSpaceAvailable(x,y, board, shiplength){ //chack if it is space on the board for a new ship
     
 function checkSpaceAvailable(x,y, board, shiplength){ //chack if it is space on the board for a new ship
@@ -62,7 +83,6 @@ function checkSpaceAvailable(x,y, board, shiplength){ //chack if it is space on 
         }
         return w;
     }
-//    function addShip(x, y, board, shipname, shiplength){ // add a new ship on the board    
 function addShip(x, y, board, ship, shiplength){ // add a new ship on the board 
     let newPoz = checkSpaceAvailable(x,y, board, shiplength);
         if(newPoz == true){
@@ -71,7 +91,7 @@ function addShip(x, y, board, ship, shiplength){ // add a new ship on the board
                 x = x + 1
                 }
             }else { 
-                console.log('try another pozition');
+              //  console.log('try another pozition');
                 return;;
             }
         }
@@ -79,34 +99,38 @@ function computerHit(board){ // computer hit on the board random
         let x = Math.floor(Math.random() * board.length);
         let y = Math.floor(Math.random() * board.length );
         if ( board[x][y].name != undefined){
-                console.log('ship hit  ' + board[x][y].name);
+            //    console.log('ship hit  ' + board[x][y].name);
+                let computer_hit = 'ship hit  ' + board[x][y].name;
                 board[x][y].length = board[x][y].length - 1;
                 board[x][y].hit = board[x][y].hit + 1;
                 board[x][y].isSunk();
-                board[x][y] = 'xx';           
-            }
+                board[x][y] = 'xxx'; 
+                return computer_hit;          
+            }else{
                 board[x][y] = 'X';
+            }
         }
 
 function yourHit(board, x, y){
         if ( board[x][y].name != undefined){
-            console.log('you hit ship ' + board[x][y].name);
+            let your_hit = '  ' + board[x][y].name;
             board[x][y].length = board[x][y].length - 1;
             board[x][y].hit = board[x][y].hit + 1;
             board[x][y].isSunk();
-            board[x][y] = 'xx';
+            board[x][y] = 'xxx';
+            return your_hit;
         }
-          return board[x][y] = 'x';
+           board[x][y] = 'x';
     }
-    addShip(1, 1, bd1, ship1, ship1.length);
-    addShip(0, 2, bd1, ship2, ship2.length);
-    yourHit(bd1, 1, 1);
-    yourHit(bd1, 2, 1);
-    computerHit(bd1)
-    computerHit(bd1); 
-    console.log(bd1)
-    console.log(ship1);
-    console.log(ship2);
+  //  addShip(1, 1, bd1, ship1, ship1.length);
+  //  addShip(0, 2, bd1, ship2, ship2.length);
+  //  yourHit(bd1, 1, 1);
+  //  yourHit(bd1, 2, 1);
+  //  computerHit(bd1)
+  //  computerHit(bd1); 
+  //  console.log(bd1)
+  //  console.log(ship1);
+  //  console.log(ship2);
 
-
+//
 

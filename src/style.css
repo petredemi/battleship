@@ -1,3 +1,36 @@
 div{
     color:green;
 }
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+}
+
+.board{
+    display: grid;
+    gap: 3px;
+    border: 1px solid black;
+    width: fit-content;
+    margin: 10px
+    
+
+}
+.board > div{
+    border: 1px solid black;
+    padding: 8px;
+}
+#your_display div, p{
+    display: flex;
+    margin: 3px;
+    border: 1px solid red;
+
+}
+#comp_display div, p{
+    display: flex;
+    margin: 3px;
+    border: 1px solid red;
+}
