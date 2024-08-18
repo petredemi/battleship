@@ -9,6 +9,7 @@ module.exports = {
     test: './src/battleship.test.js',
     you : './src/you.js',
     computer: './src/computer.js',
+    createdom: './src/createdom.js'
   },
   devtool: 'inline-source-map',
   plugins: [

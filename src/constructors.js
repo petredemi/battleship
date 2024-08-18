@@ -1,8 +1,7 @@
-import { add, indexOf } from 'lodash';
+//import { add, indexOf } from 'lodash';
 /**@type {import('jest').Config}*/
-export  {addShip, Ship, Gameboard, checkSpaceAvailable, yourHit, computerHit,
-    checkShipsOnBoard
-};//class Ship{
+export  { Ship, Gameboard,  yourHitCordinates, computerHitCordinates, addShip, 
+    indexOfDiv, checkShipsOnBoard };//class Ship{
     
 class Ship{
     constructor(length, hit, sunk, name){
@@ -39,14 +38,6 @@ class Ship{
        }
     } 
 }
-
-const ship1  = new Ship(3 , 0, false, 'M');
-const ship2 = new Ship(2, 0, false, 'L');
-const  bd1 = [[0,0,0,0],
-             [0,0,0,0],
-             [0,0 ,0,0],
-             [0,0 ,0,0]];
-
 function checkShipsOnBoard(board){    
     let numberOfShips = 0;         
     for( let i = 0; i < board[0].length ; i++){
@@ -57,50 +48,50 @@ function checkShipsOnBoard(board){
         }
     }
         if( numberOfShips == 0){
-            return 'no more ships';
+            return 'no ships';
         }else{
         return'  ' + numberOfShips;
-        }
-            
+        }          
 }
-//checkShipsOnBoard(bd1);
-
-export default bd1;//function checkSpaceAvailable(x,y, board, shiplength){ //chack if it is space on the board for a new ship
-    
-function checkSpaceAvailable(x,y, board, shiplength){ //chack if it is space on the board for a new ship
-    let w = true;
-    if( x > board.length - shiplength || y > board.length - shiplength || board[x][y] != 0){
-        return false;
-    }
-        for(let i = 0; i < shiplength; i++){
-            if(board[x + i][y] == 0){
-                w = true;  
-            }
-            else if(board[x + i][y] != 0){
-                w = false;
-                break;
-            }
-        }
-        return w;
-    }
-function addShip(x, y, board, ship, shiplength){ // add a new ship on the board 
-    let newPoz = checkSpaceAvailable(x,y, board, shiplength);
-        if(newPoz == true){
-          for(let i = 0; i < shiplength; i++){
-                board[x][y] = ship;
-                x = x + 1
+  
+function addShip(x, y, board, ship, poz){ //check if it is space on the board for ship and add
+    if( x > board.length - ship.length || y > board.length - ship.length || board[x][y] != 0 ){
+        return;
+    }else {
+    //     poz = 'vertical';
+            for(let i = 0; i < ship.length; i++){
+                if ( poz == 'vertical'){
+                     if(board[x][y] == 0){
+                         board[x][y] = ship;
+                             x = x + 1
+                             poz = 'vertical'
+                     }
+                     else if( board[x][y] != 0){
+                        poz = 'horizontal'
+                        return;
+                     }
                 }
-            }else { 
-              //  console.log('try another pozition');
-                return;;
+            }
+            for(let i = 0; i < ship.length; i++){
+                if( poz == 'horizontal'){
+                    if(board[x][y] == 0){
+                        board[x][y] = ship;
+                            y = y + 1;
+                            poz = 'horizontal'
+                    }
+                    else if( board[x][y] != 0){
+                     //   poz = 'horizontal'
+                        return;
+                    }
+                }
             }
         }
-function computerHit(board){ // computer hit on the board random
+    }
+function computerHitCordinates(board){ // computer hit on the board random
         let x = Math.floor(Math.random() * board.length);
-        let y = Math.floor(Math.random() * board.length );
+        let y = Math.floor(Math.random() * board.length);
         if ( board[x][y].name != undefined){
-            //    console.log('ship hit  ' + board[x][y].name);
-                let computer_hit = 'ship hit  ' + board[x][y].name;
+                let computer_hit = board[x][y].name;
                 board[x][y].length = board[x][y].length - 1;
                 board[x][y].hit = board[x][y].hit + 1;
                 board[x][y].isSunk();
@@ -111,9 +102,9 @@ function computerHit(board){ // computer hit on the board random
             }
         }
 
-function yourHit(board, x, y){
+function yourHitCordinates(board, x, y){
         if ( board[x][y].name != undefined){
-            let your_hit = '  ' + board[x][y].name;
+            let your_hit = board[x][y].name;
             board[x][y].length = board[x][y].length - 1;
             board[x][y].hit = board[x][y].hit + 1;
             board[x][y].isSunk();
@@ -122,15 +113,19 @@ function yourHit(board, x, y){
         }
            board[x][y] = 'x';
     }
-  //  addShip(1, 1, bd1, ship1, ship1.length);
-  //  addShip(0, 2, bd1, ship2, ship2.length);
-  //  yourHit(bd1, 1, 1);
-  //  yourHit(bd1, 2, 1);
-  //  computerHit(bd1)
-  //  computerHit(bd1); 
-  //  console.log(bd1)
-  //  console.log(ship1);
-  //  console.log(ship2);
-
-//
-
+    function indexOfDiv(n){ // find div index of tile on the bord, 
+        let x = 0;           // tne number from 0 to 63 transformed in cordinates 0, 1
+        let y = 0;
+        for( let i = 0; i <= n; i++){   
+                if ( i <= 7 ){
+                        x = 0
+                        y = i; 
+                }else if ( i > 7){
+                        y = n % 8;
+                        if( i % 8 == 0){
+                                x = x + 1
+                        }
+                }
+        }
+        return [x, y]; //return cordinate of the new ship
+    }

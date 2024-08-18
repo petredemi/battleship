@@ -1,36 +1,84 @@
 div{
-    color:green;
+    color: black;
+    text-align: center;
 }
 .container{
     display: flex;
     justify-content: center;
     align-items: center;
-
     flex-wrap: wrap;
 
 }
 
 .board{
     display: grid;
-    gap: 3px;
+    gap: 1px;
     border: 1px solid black;
     width: fit-content;
     margin: 10px
-    
-
 }
 .board > div{
     border: 1px solid black;
-    padding: 8px;
+    padding: 9px;
 }
-#your_display div, p{
+#your_display{
     display: flex;
-    margin: 3px;
     border: 1px solid red;
+    justify-content: space-between;
+    align-items: end;
+    width: 415px;
+}
+.stand{
+    display:flex;
+    flex-direction: column;
+    border: 1px solid red;
+    width: 250px;
+}
+.hit_left{
+    display: inline-flex;
+    border: 1px solid red;
+    text-align: center;
+}
+.hit_left > div{
+    padding: 1px;
+    height: 20px;
+    border: 1px solid red;
+    padding-bottom: 1px;
+    margin: 3px;
+    top:50%;
+    right: 50%;
+}
+#comp_display{
+    display:flex;
+    border: 1px solid red;
+    align-items: end;
+    justify-content:space-between;
+}
 
+.buttons{
+    border: 1px solid red;
+    display: grid;
+    grid-template-columns: 80px 80px;
+    flex-direction: column;
 }
-#comp_display div, p{
-    display: flex;
-    margin: 3px;
+li{
+    list-style: none;
+    
+}
+button{
+    padding: 4px;
+    margin: 4px;
+    height: 25px;
+    padding-right: 20px;
+}
+p{
+    text-align:end;
+    margin-left: 40px;
+    margin-bottom: 2px;
+    margin-top: 1px;
+    padding: 2px;
     border: 1px solid red;
 }
+/*.board > div{
+    background-image: url('./icons/fire.png');
+}*/
