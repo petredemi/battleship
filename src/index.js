@@ -2,16 +2,27 @@
 import _ from 'lodash';
 import './style.css';
 import paltinleafs from './paltinleafs.jpg';
+import circle from './icons/circle.png';
+import bullseye from './icons/bullseye.png';
 
+
+const iconcircle = new Image();
+const iconbullseye = new Image();
+iconcircle.src = circle;   
+iconbullseye.src = bullseye;
 
 function component() {
     const element = document.createElement('div');
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
     const myIcon = new Image();
     myIcon.src = paltinleafs;
-  
-    element.appendChild(myIcon);
     return element;
   }
-  document.body.appendChild(component());
+//document.body.appendChild(component());
+const boardcoverChildren = document.querySelectorAll('#boardcover > div'); //board cover of computerBoard
+boardcoverChildren.forEach((div) => { // set color of computer board cover
+        //div.setAttribute('style', 'background-color: aqua');
+})
+
+
 

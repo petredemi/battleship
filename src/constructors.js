@@ -1,7 +1,8 @@
 //import { add, indexOf } from 'lodash';
 /**@type {import('jest').Config}*/
+import _ from 'lodash';
 export  { Ship, Gameboard,  yourHitCordinates, computerHitCordinates, addShip, 
-    indexOfDiv, checkShipsOnBoard };//class Ship{
+    indexOfDiv, checkShipsOnBoard };//class Ship
     
 class Ship{
     constructor(length, hit, sunk, name){
@@ -95,25 +96,25 @@ function computerHitCordinates(board){ // computer hit on the board random
                 board[x][y].length = board[x][y].length - 1;
                 board[x][y].hit = board[x][y].hit + 1;
                 board[x][y].isSunk();
-                board[x][y] = 'xxx'; 
+                board[x][y] = 'X'; 
                 return computer_hit;          
             }else{
-                board[x][y] = 'X';
+                board[x][y] = 'O';
             }
         }
-
 function yourHitCordinates(board, x, y){
         if ( board[x][y].name != undefined){
             let your_hit = board[x][y].name;
             board[x][y].length = board[x][y].length - 1;
             board[x][y].hit = board[x][y].hit + 1;
             board[x][y].isSunk();
-            board[x][y] = 'xxx';
+            board[x][y] = 'X';
             return your_hit;
+        }else{
+           board[x][y] = 'O';
         }
-           board[x][y] = 'x';
     }
-    function indexOfDiv(n){ // find div index of tile on the bord, 
+function indexOfDiv(n){ // find div index of tile on the bord, 
         let x = 0;           // tne number from 0 to 63 transformed in cordinates 0, 1
         let y = 0;
         for( let i = 0; i <= n; i++){   

@@ -15,11 +15,12 @@ let calldialog = document.querySelector('#calldialog');
 let Okay = document.querySelector('#Okay');
 let addboat = document.querySelector('#addboat')
 const names = ['dia', 'zoia', 'oxi', 'mir', 'ema', 'dar'];
-const colors = [ 'green', 'darkred', 'crimson', 'darkblue', 'darkorange','mediumturquoise', 'mediumseagreen', 'teal']
+const colors = [ 'green', 'crimson', 'darkblue', 'darkorange','mediumturquoise', 'mediumseagreen', 'teal']
 const poz = [ 'vertical', 'horizontal'];
 console.log(yourBoard.squares);
 
-checkShipsOnBoard(yourBoard.squares);
+
+//checkShipsOnBoard(yourBoard.squares);
 addboat.addEventListener('click', () => {
            calldialog.showModal();
         });
@@ -42,9 +43,7 @@ Okay.addEventListener('click', () => {
         zlength.value = '';
 
     });
-checkShipsOnBoard(yourBoard.squares);
-checkShipsOnBoard(yourBoard.squares);function 
-createDomYourBoard(){
+function createDomYourBoard(){
         const your_board = document.querySelector( '#yourboard');
         const div0 = document.createElement('div');
         const div1 = document.createElement('div');
@@ -62,10 +61,10 @@ createDomYourBoard(){
 createDomYourBoard();
 const shotsleft = document.querySelector('#your_shotleft');
 shotsleft.textContent = checkShipsOnBoard(yourBoard.squares);
-        const boardtiles = document.querySelectorAll('div.yourcontainer > div.board div');
-        let arrNodelist = new Array(boardtiles);
+const boardtiles = document.querySelectorAll('div.yourcontainer > div.board div');
+let arrNodelist = new Array(boardtiles);
         let arrBoard = []; // convert matrix to a in line array
-console.log(arrNodelist)
+
 function updateBoard(){ // display ships on the board
         for (let i = 0; i < 8; i++){
                 for(let j = 0; j < 8; j++){
@@ -78,9 +77,9 @@ function updateBoard(){ // display ships on the board
                       //  arrNodelist[0][i].setAttribute('style', 'border: 1px solid black');
                         arrNodelist[0][i].setAttribute(`style`, `border: 1px solid black; background-color: ${arrBoard[i].color}`);
                 }else if(typeof arrBoard[i] == 'string'){
-                        arrNodelist[0][i].setAttribute('style', 'background-color: lightpink');
+                        arrNodelist[0][i].setAttribute('style', 'color: red; font-size: 40px');
                         arrNodelist[0][i].textContent = arrBoard[i];
-                        arrNodelist[0][i].setAttribute('style', 'background-color: lightpink');
+                   //     arrNodelist[0][i].setAttribute('style', 'background-color: lightpink');
                 }
            }
     }
@@ -106,7 +105,7 @@ arrNodelist[0].forEach((div, index) => div.addEventListener('click', () => { // 
         addShip(x, y, yourBoard.squares, ship, poz[v]);
         arrBoard = []
         updateBoard();
-        checkShipsOnBoard(yourBoard.squares);
+        shotsleft.textContent = checkShipsOnBoard(yourBoard.squares);
 }));
 const clear = document.querySelector('#clearboard');
 let boardNodes = document.querySelectorAll(' div.yourcontainer > div.board > div')
@@ -121,11 +120,15 @@ clear.addEventListener('click', () => {
       //          div.style.border = '1px';
                 console.log(yourBoard.squares)
         })
+        shotsleft.textContent = checkShipsOnBoard(yourBoard.squares);
+
 })
 const shoot = document.querySelector('#shoot');
+const shiphit = document.querySelector('#shiphit');
 shoot.addEventListener('click', () => {
-        computerHitCordinates(yourBoard.squares);
+        shiphit.textContent = computerHitCordinates(yourBoard.squares);
         arrBoard = [];
         updateBoard();
-        console.log(yourBoard.squares);
+        shotsleft.textContent = checkShipsOnBoard(yourBoard.squares);
+
 })
