@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Battleship</title>
-</head>
+<script defer src="index.bundle.js"></script><script defer src="constructors.bundle.js"></script><script defer src="test.bundle.js"></script><script defer src="you.bundle.js"></script><script defer src="computer.bundle.js"></script><script defer src="createdom.bundle.js"></script></head>
 <body>
     <div class="container">
         <div id ="yourboard">
@@ -12,7 +12,7 @@
             <div id="your_display">
                 <div class="stand">
                     <div class="hit_left">
-                            <div>Shots left:</div>
+                            <div>Ships left:</div>
                             <p id="your_shotleft"></p>
                     </div>
                     <div class="hit_left">
@@ -27,11 +27,11 @@
             </div>
         </div>
         <div id="computerboard">
-            <h1>computerboard</h1>
+            <h1>computer board</h1>
             <div id="comp_display">
                 <div class="stand">
                      <div class="hit_left">
-                         <div>Shots left:</div>
+                         <div>Ships left:</div>
                          <p id = 'comp_shotsleft'></p>
                      </div>
                      <div class="hit_left">
@@ -135,6 +135,14 @@
         </form>
         <button type="submit" data-close-modal id="Okay">ok</button>
     </dialog>
-
-<script defer src="index.bundle.js"></script><script defer src="constructors.bundle.js"></script><script defer src="test.bundle.js"></script><script defer src="you.bundle.js"></script><script defer src="computer.bundle.js"></script><script defer src="createdom.bundle.js"></script></body>
+<div class="rules"> 
+    <ul>
+        <li>- add ships on your board by click on board or add button,</li>
+        <li>- ships will be added randomly vertical or horizontal if mach the space,</li>
+        <li>- click on computer board to hit where you want,</li>
+        <li>- computer shoot randomly on your board,</li>
+    </ul>
+</div>
+<footer>copyright: PetruD, @Odin Project</footer>
+</body>
 </html>
