@@ -30,7 +30,6 @@ const colors = [ 'green', 'crimson', 'dodgerblue', 'darkorange','mediumturquoise
 const poz = [ 'vertical', 'horizontal'];
 console.log(yourBoard.squares);
 
-
 //checkShipsOnBoard(yourBoard.squares);
 addboat.addEventListener('click', () => {
            calldialog.showModal();
@@ -97,7 +96,7 @@ function updateBoard(){ // display ships on the board
 updateBoard();
 
 // not more used, add ships on board by double click on the board randomly
-arrNodelist[0].forEach((div, index) => div.addEventListener('dblclick', () => { // add ships on board
+arrNodelist[0].forEach((div, index) => div.addEventListener('click', () => { // add ships on board
             console.log(index); // add ships on board
             indexOfDiv(index) // array from [0, 1] for indexes numbers from 0 to 63
             let z = Math.floor(Math.random() * 4)
@@ -137,34 +136,27 @@ function dragShips(){
                buildShip(x, y, yourBoard.squares, ship);
                div.style.backgroundColor = colors[c];
                z = z + 1;
-        //       arrBoard = []
-          //     updateBoard()
-               console.log(ship);
        }));
        arrNodelist[0].forEach((div) => div.addEventListener('mouseup', (e) => {
             event = false;
             n = 0
             arrBoard = []
             updateBoard();   
-            console.log(z);
             z = 1;
             }));    
        arrNodelist[0].forEach((div, index) => div.addEventListener('mouseenter', (e) => {
-            if ( event == true && z < 5){
+        if ( event == true && z < 5){
             div.style.backgroundColor = 'pink';
             let x = indexOfDiv(index)[0];
             let y = indexOfDiv(index)[1];
             let ship = new Ship (z, 0, false, names[n]);
             Object.defineProperty(ship, "color", {value: colors[c]}) // add color property at ship object
                 buildShip(x, y, yourBoard.squares, ship);
-                console.log(ship);
-                console.log(index);
-                console.log(z);
                 z = z + 1;
         }
     }));
 }
-dragShips();
+//dragShips(); do not used
 const clear = document.querySelector('#clearboard');
 let boardNodes = document.querySelectorAll(' div.yourcontainer > div.board > div')
 
