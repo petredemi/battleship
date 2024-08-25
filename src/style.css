@@ -2,12 +2,16 @@ div{
     color: black;
     text-align: center;
 }
-
+body{
+    display: flex;
+    flex-direction: column;
+}
 .container{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    margin: 3px;
 
 }
 #yourboard{
@@ -35,7 +39,6 @@ div{
     border-radius: 5px;
 
 }
-
 .board{
     display: grid;
     gap: 1px;
@@ -147,10 +150,17 @@ form > li{
     list-style: none;
 
 }
+.rules{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 ul{
     text-align: justify;
-    margin-left: 20px;
     margin-right: 60px;
+    margin-left: 20px;
+    border: 1px solid red;
+
 }
 /*.board > div{
     background-image: url('./icons/fire.png');

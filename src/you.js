@@ -19,7 +19,7 @@ let calldialog = document.querySelector('#calldialog');
 let Okay = document.querySelector('#Okay');
 let addboat = document.querySelector('#addboat')
 const names = ['Katy', 'Jeny', 'Tom', 'Elon', 'Trump', 'Bill'];
-const colors = [ 'green', 'crimson', 'dodgeblue', 'darkorange','mediumturquoise', 'mediumseagreen', 'teal', 'red']
+const colors = [ 'green', 'crimson', 'dodgeblue', 'darkorange','mediumturquoise', 'mediumseagreen', 'teal']
 const poz = [ 'vertical', 'horizontal'];
 console.log(yourBoard.squares);
 
@@ -34,7 +34,7 @@ Okay.addEventListener('click', () => {
         let x = Number(xrow.value);
         let y = Number(ycolumn.value);
         let v = Math.floor(Math.random() * 2); // poz vertical or horizontal
-        let c = Math.floor(Math.random() * 10); // color pozition
+        let c = Math.floor(Math.random() * 9); // color pozition
 
         let ship = new Ship (z, 0, false, names[z]);
         Object.defineProperty(ship, "color", {value: colors[c]}) // add color property at ship object
