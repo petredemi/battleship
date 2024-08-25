@@ -11,6 +11,12 @@ module.exports = {
     computer: './src/computer.js',
     createdom: './src/createdom.js'
   },
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    clean: true,
+  },
+
   devtool: 'inline-source-map',
   plugins: [
     new HtmlWebpackPlugin({
@@ -18,24 +24,22 @@ module.exports = {
       template: './src/index.html',
     }),
   ],
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    clean: true,
-  },
   module: {
     rules: [
-   //   {
-   //     test: /\.jsx?$/,
-   //     exclude: ['node_modules'],
-   //     use: ['babel-loader'],
-   //   },
+     // {
+     //   test: /\.jsx?$/,
+    //    exclude: ['node_modules'],
+     //   use: ['babel-loader'],
+     // },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif|wav|mp3)$/i,
+       // use: [
+         // 'file-loader'
+     // ],
         type: 'asset/resource',
       },
       {

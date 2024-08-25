@@ -112,10 +112,6 @@ div{
     grid-template-columns: 80px 80px;
     flex-direction: column;
 }
-li{
-    list-style: none;
-    
-}
 button{
     padding: 4px;
     margin: 4px;
@@ -144,10 +140,17 @@ form{
     width: 200px;
     height: 100px;
 }
-li{
+form > li{
     display: flex;
     justify-content: space-between;
     margin: 7px;
+    list-style: none;
+
+}
+ul{
+    text-align: justify;
+    margin-left: 20px;
+    margin-right: 60px;
 }
 /*.board > div{
     background-image: url('./icons/fire.png');

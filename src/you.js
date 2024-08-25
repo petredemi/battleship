@@ -1,21 +1,25 @@
 /**@type {import('jest').Config}*/
-import { findIndex, indexOf } from "lodash";
+import { findIndex, functions, indexOf } from "lodash";
 import './style.css';
 import {Gameboard, Ship, addShip, computerHitCordinates, indexOfDiv, checkShipsOnBoard } from "./constructors.js";
+import sound from './sounds/explosion.mp3';
+import soundwater from './sounds/underwater-explosion.mp3'
 
+const soundexplosion = new Audio(sound);
+const soundunderwater = new Audio(soundwater)
 const boardH = 8;
 const boardW = 8;
 const yourBoard =  new Gameboard(boardH, boardW);
         yourBoard.createBoard();
 let xrow = document.querySelector('#xrow');
-let ycolumn = document.querySelector('#ycolumn');
+let ycolumn = document.querySelector('#ycolumn'); 
 let zlength = document.querySelector('#zlength');
 
 let calldialog = document.querySelector('#calldialog');
 let Okay = document.querySelector('#Okay');
 let addboat = document.querySelector('#addboat')
-const names = ['dia', 'zoia', 'oxi', 'mir', 'ema', 'dar'];
-const colors = [ 'green', 'crimson', 'darkblue', 'darkorange','mediumturquoise', 'mediumseagreen', 'teal']
+const names = ['Katy', 'Jeny', 'Tom', 'Elon', 'Trump', 'Bill'];
+const colors = [ 'green', 'crimson', 'dodgeblue', 'darkorange','mediumturquoise', 'mediumseagreen', 'teal', 'red']
 const poz = [ 'vertical', 'horizontal'];
 console.log(yourBoard.squares);
 
@@ -30,7 +34,7 @@ Okay.addEventListener('click', () => {
         let x = Number(xrow.value);
         let y = Number(ycolumn.value);
         let v = Math.floor(Math.random() * 2); // poz vertical or horizontal
-        let c = Math.floor(Math.random() * 9); // color pozition
+        let c = Math.floor(Math.random() * 10); // color pozition
 
         let ship = new Ship (z, 0, false, names[z]);
         Object.defineProperty(ship, "color", {value: colors[c]}) // add color property at ship object
@@ -84,13 +88,7 @@ function updateBoard(){ // display ships on the board
            }
     }
 updateBoard();
-//arrNodelist[0].forEach((div) => div.addEventListener('mouseleave', (e) => {
-//        div.style.backgroundColor = 'green';
-//}));
-//arrNodelist[0].forEach((div) => div.addEventListener('mouseleave', (e) => {
-//        div.style.backgroundColor = '';
-//}));
-//console.log(tiles);
+// add ships on board;
 arrNodelist[0].forEach((div, index) => div.addEventListener('click', () => { // add ships on board
         console.log(index); // add ships on board
         indexOfDiv(index)
@@ -124,11 +122,24 @@ clear.addEventListener('click', () => {
 
 })
 const shoot = document.querySelector('#shoot');
-const shiphit = document.querySelector('#shiphit');
+const shiphit = document.querySelector('#shiphit'); // name of the hit ship
+// shoot of computer to your board
 shoot.addEventListener('click', () => {
         shiphit.textContent = computerHitCordinates(yourBoard.squares);
+        setTimeout(delay, 1000);
+        function delay(){
+                if ( shiphit.textContent != ''){
+                        soundexplosion.currentTime = 0;
+                        soundexplosion.play();
+                }else {
+                        soundunderwater.currentTime = 0;
+                        soundunderwater.play();
+                }        
+        }
+      //  soundexplosion.currentTime = 0;
         arrBoard = [];
-        updateBoard();
+        setTimeout(updateBoard, 2000);
+
         shotsleft.textContent = checkShipsOnBoard(yourBoard.squares);
 
 })

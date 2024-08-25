@@ -10,19 +10,26 @@ const iconcircle = new Image();
 const iconbullseye = new Image();
 iconcircle.src = circle;   
 iconbullseye.src = bullseye;
+//const image = document.createElement('img');
+//image.src = iconcircle
+//document.body.appendChild(image);
+const myIcon = new Image();
+myIcon.src = paltinleafs;
+
 
 function component() {
-    const element = document.createElement('div');
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-    const myIcon = new Image();
-    myIcon.src = paltinleafs;
-    return element;
-  }
-//document.body.appendChild(component());
-const boardcoverChildren = document.querySelectorAll('#boardcover > div'); //board cover of computerBoard
-boardcoverChildren.forEach((div) => { // set color of computer board cover
-        //div.setAttribute('style', 'background-color: aqua');
-})
+  const element = document.createElement('div');
 
+  // Lodash, now imported by this script
+  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+  element.classList.add('hello');
 
+ // Add the image to our existing div.
+
+ element.appendChild(myIcon);
+
+  return element;
+}
+
+document.body.appendChild(component());
 

@@ -1,22 +1,34 @@
 import { Gameboard, Ship, addShip, yourHitCordinates, checkShipsOnBoard,
        indexOfDiv } from "./constructors.js";
+import fire from './icons/fire.png'
 import circle from './icons/circle.png';
 import bullseye from './icons/bullseye.png';
-//import boom from './clap.wav'
+import explosion from './sounds/bomb-drop-impact.wav';
+import underwatersound from './sounds/underwater-explosion.mp3'
 
-const iconcircle = new Image();
+const iconfire = new Image();
 const iconbullseye = new Image();
+const iconcircle = new Image();
+
+const soundboom = new Audio(explosion);
+const underwaterexplosion = new Audio(underwatersound) 
+
+
+iconfire.src = fire;
 iconcircle.src = circle;   
 iconbullseye.src = bullseye;
+
+console.log(iconfire);
+console.log(iconcircle);
 
 //document.body.style.backgroundImage = iconfire;    
 let boardH = 8;
 let boardW = 8
 let computerBoard =  new Gameboard(boardH, boardW);
         computerBoard.createBoard();
-        let colors = [ 'green', 'blue', 'darkorange', 'silver', 'yellow', 'brown'];
+        let colors = [ 'green', 'dodgerblue', 'darkorange', 'silver', 'yellow', 'brown'];
         const pozition = ['vertical', 'horizontal']
-const shipsNames = ['mir', 'oxi', 'dar', 'ema', 'lid', 'dia', 'pet'];
+const shipsNames = ['John', 'Klint', 'Peter', 'Eifel', 'Katty', 'Roses', 'Steve'];
 
 function createShips(n){
         let poz = 0;
@@ -33,7 +45,7 @@ function createShips(n){
             addShip(v, w, computerBoard.squares, ship, pozition[poz]);
         }
     }
-createShips(5);
+createShips(2);
 function createDomComputerBoard(){
         const computer_board = document.querySelector( '#computerboard');
    //     const boardcover = document.querySelector('#boardcover');
@@ -47,18 +59,22 @@ function createDomComputerBoard(){
         div1.setAttribute('style', `grid-template-columns: repeat(${boardH},  50px)`);
         for(let i = 0; i < boardH ** 2; i++){
                 let div = document.createElement('div');
-                div.setAttribute('style', `height: 30px; width: 30px`);
+                div.setAttribute('style', `height: 30px; width: 30px;`);
+             //   div.style.backgroundImage = `url(${iconfire})`
+           //     div.setAttribute('style', `background-image: ${iconfire}`);
+                div.style.backgroundImage = iconfire;
                 div1.append(div);
         }
 }
 createDomComputerBoard();
-
         const comp_shotsleft = document.querySelector('#comp_shotsleft');
         comp_shotsleft.textContent = checkShipsOnBoard(computerBoard.squares);
+
         const copm_shiphit = document.querySelector('#comp_shiphit');
         const boardtiles = document.querySelectorAll('div.computercontainer > div.board > div');
         const arrNodelist = new Array(boardtiles);
         let arrBoard = []; // convert matrix to a in line array
+
 function updateBoard(){
         for (let i = 0; i < 8; i++){
                 for(let j = 0; j < 8; j++){
@@ -95,9 +111,11 @@ clear.addEventListener('click', () => { // clear computer board
           //            div.style.border ='1px';
                 })
              comp_shotsleft.textContent = ''
+             comp_shotsleft.setAttribute('style', `background-image: ${iconfire}`);
+
              copm_shiphit.textContent = '';
              boardcoverChildren.forEach((div) => {
-       //  div.setAttribute('style', 'background-color: aqua');
+         div.setAttribute('style', 'background-color: aqua');
 
             })
         
@@ -117,7 +135,7 @@ showCompBoard.addEventListener('click', () => { // show computer board
                         showCompBoard.textContent = 'show';
                 });
                 showCompBoard.textContent = 'show';
-           boardcoverChildren.forEach((div) => {
+                boardcoverChildren.forEach((div) => {
                 div.setAttribute('style', 'background-color: aqua');
            })
            show = true;
@@ -129,12 +147,14 @@ add.addEventListener('click', () => { // add ships on board
                 updateBoard();
                 comp_shotsleft.textContent = checkShipsOnBoard(computerBoard.squares);
 
+
         });
-//const boom = document.querySelector('#boom');
+//shoot on computer board
 boardcoverChildren.forEach((div, index) => div.addEventListener('click', (e) => { // hit a ship
         youHit(index); //hit  of computer board
         comp_shotsleft.textContent = checkShipsOnBoard(computerBoard.squares);
         div.setAttribute('style', 'background-color: transparent');
+        
 }));
 arrNodelist[0].forEach((div) => div.addEventListener('mouseleave', (e) => {
      //   div.style.backgroundColor = '';
@@ -142,7 +162,23 @@ arrNodelist[0].forEach((div) => div.addEventListener('mouseleave', (e) => {
 function youHit(index){     // you shot on computer board 
         let x = indexOfDiv(index)[0]
         let y = indexOfDiv(index)[1]
+        updateBoard()
+      function delay(){
+
+              if( typeof computerBoard.squares[x][y] == 'object'){
+                      soundboom.currentTime = 0;
+                      soundboom.play();
+                }else{
+                     underwaterexplosion.currentTime = 0;
+                     underwaterexplosion.play()
+                }
+         }
+        delay();
+        console.log(typeof computerBoard.squares[x][y])
+
         copm_shiphit.textContent = yourHitCordinates(computerBoard.squares, x, y)
-        arrBoard = [];
-        updateBoard();
+        arrBoard = []; 
+
+        setTimeout(updateBoard, 2500)
 }
+console.log(computerBoard.squares)

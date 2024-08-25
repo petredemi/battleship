@@ -46,8 +46,8 @@ function checkShipsOnBoard(board){
            if (typeof board[i][j] == 'object'){
                     numberOfShips = numberOfShips + 1;
            };
-        }
-    }
+        };
+    };
         if( numberOfShips == 0){
             return 'no ships';
         }else{
