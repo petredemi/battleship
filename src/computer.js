@@ -7,8 +7,9 @@ import explosion from './sounds/bomb-drop-impact.wav';
 import underwatersound from './sounds/underwater-explosion.mp3'
 
 const iconfire = new Image();
-const iconbullseye = new Image();
 const iconcircle = new Image();
+const iconbullseye = new Image();
+
 
 const soundboom = new Audio(explosion);
 const underwaterexplosion = new Audio(underwatersound) 

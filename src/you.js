@@ -1,9 +1,16 @@
 /**@type {import('jest').Config}*/
-import { findIndex, functions, indexOf } from "lodash";
 import './style.css';
-import {Gameboard, Ship, addShip, computerHitCordinates, indexOfDiv, checkShipsOnBoard } from "./constructors.js";
+import {Gameboard, Ship, addShip, computerHitCordinates, indexOfDiv, checkShipsOnBoard,
+        buildShip } from "./constructors.js";
 import sound from './sounds/explosion.mp3';
 import soundwater from './sounds/underwater-explosion.mp3'
+
+import fire from './icons/fire.png'
+import circle from './icons/circle.png';
+const iconfire = new Image();
+const iconcircle = new Image();
+iconfire.src = fire;
+iconcircle.src = circle;   
 
 const soundexplosion = new Audio(sound);
 const soundunderwater = new Audio(soundwater)
@@ -18,7 +25,7 @@ let zlength = document.querySelector('#zlength');
 let calldialog = document.querySelector('#calldialog');
 let Okay = document.querySelector('#Okay');
 let addboat = document.querySelector('#addboat')
-const names = ['Katy', 'Jeny', 'Tom', 'Elon', 'Trump', 'Bill'];
+const names = ['Katy', 'Jeny', 'Tom', 'Elon', 'Bear', 'Bill'];
 const colors = [ 'green', 'crimson', 'dodgerblue', 'darkorange','mediumturquoise', 'mediumseagreen', 'teal', 'red', 'yellow']
 const poz = [ 'vertical', 'horizontal'];
 console.log(yourBoard.squares);
@@ -88,23 +95,76 @@ function updateBoard(){ // display ships on the board
            }
     }
 updateBoard();
-// add ships on board;
-arrNodelist[0].forEach((div, index) => div.addEventListener('click', () => { // add ships on board
-        console.log(index); // add ships on board
-        indexOfDiv(index)
-        let z = Math.floor(Math.random() * 4)
-        let x = indexOfDiv(index)[0];
-        let y = indexOfDiv(index)[1];
-        let v = Math.floor(Math.random() * 2); // poz vertical or horizontal
-        let c = Math.floor(Math.random() * 7); // color pozition
 
-        let ship = new Ship (z, 0, false, names[z]);
-        Object.defineProperty(ship, "color", {value: colors[c]}) // add color property at ship object
-        addShip(x, y, yourBoard.squares, ship, poz[v]);
-        arrBoard = []
-        updateBoard();
-        shotsleft.textContent = checkShipsOnBoard(yourBoard.squares);
+// not more used, add ships on board by double click on the board randomly
+arrNodelist[0].forEach((div, index) => div.addEventListener('dblclick', () => { // add ships on board
+            console.log(index); // add ships on board
+            indexOfDiv(index) // array from [0, 1] for indexes numbers from 0 to 63
+            let z = Math.floor(Math.random() * 4)
+            let x = indexOfDiv(index)[0];
+            let y = indexOfDiv(index)[1];
+            let v = Math.floor(Math.random() * 2); // poz vertical or horizontal
+            let c = Math.floor(Math.random() * 7); // color pozition
+
+            let ship = new Ship (z, 0, false, names[z]);
+            Object.defineProperty(ship, "color", {value: colors[c]}) // add color property at ship object
+            addShip(x, y, yourBoard.squares, ship, poz[v]);
+            arrBoard = []
+            updateBoard();
+            shotsleft.textContent = checkShipsOnBoard(yourBoard.squares);
 }));
+
+// add ships on board , build ships by mouse
+function dragShips(){
+    let event = false;
+    let z = 1; // ship lenght
+    let c = 0 // color index
+    let n = 0; // name index in array
+    arrNodelist[0].forEach((div, index) => div.addEventListener('mousedown', (e) => {
+           //    div.style.backgroundColor = 'pink';
+               //div.style.backgroundImage = iconfire;
+               event = true;
+               console.log(index); // add ships on board
+               let x = indexOfDiv(index)[0];
+               let y = indexOfDiv(index)[1];
+               if ( typeof yourBoard.squares[x][y] == 'object' || z > 4){
+                return;
+               }
+               c = Math.floor(Math.random() * 7); // color index
+               n = Math.floor(Math.random() * 5);
+               let ship = new Ship (z, 0, false, names[n]);
+               Object.defineProperty(ship, "color", {value: colors[c]}) // add color property at ship object
+               buildShip(x, y, yourBoard.squares, ship);
+               div.style.backgroundColor = colors[c];
+               z = z + 1;
+        //       arrBoard = []
+          //     updateBoard()
+               console.log(ship);
+       }));
+       arrNodelist[0].forEach((div) => div.addEventListener('mouseup', (e) => {
+            event = false;
+            n = 0
+            arrBoard = []
+            updateBoard();   
+            console.log(z);
+            z = 1;
+            }));    
+       arrNodelist[0].forEach((div, index) => div.addEventListener('mouseenter', (e) => {
+            if ( event == true && z < 5){
+            div.style.backgroundColor = 'pink';
+            let x = indexOfDiv(index)[0];
+            let y = indexOfDiv(index)[1];
+            let ship = new Ship (z, 0, false, names[n]);
+            Object.defineProperty(ship, "color", {value: colors[c]}) // add color property at ship object
+                buildShip(x, y, yourBoard.squares, ship);
+                console.log(ship);
+                console.log(index);
+                console.log(z);
+                z = z + 1;
+        }
+    }));
+}
+dragShips();
 const clear = document.querySelector('#clearboard');
 let boardNodes = document.querySelectorAll(' div.yourcontainer > div.board > div')
 
@@ -119,9 +179,8 @@ clear.addEventListener('click', () => {
                 console.log(yourBoard.squares)
         })
         shotsleft.textContent = checkShipsOnBoard(yourBoard.squares);
-
 })
-const shoot = document.querySelector('#shoot');
+const shoot = document.querySelector('#shoot'); // shoot button
 const shiphit = document.querySelector('#shiphit'); // name of the hit ship
 // shoot of computer to your board
 shoot.addEventListener('click', () => {
@@ -136,10 +195,7 @@ shoot.addEventListener('click', () => {
                         soundunderwater.play();
                 }        
         }
-      //  soundexplosion.currentTime = 0;
         arrBoard = [];
         setTimeout(updateBoard, 2000);
-
         shotsleft.textContent = checkShipsOnBoard(yourBoard.squares);
-
 })

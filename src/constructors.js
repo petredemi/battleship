@@ -2,7 +2,7 @@
 /**@type {import('jest').Config}*/
 import _ from 'lodash';
 export  { Ship, Gameboard,  yourHitCordinates, computerHitCordinates, addShip, 
-    indexOfDiv, checkShipsOnBoard };//class Ship
+    indexOfDiv, checkShipsOnBoard, buildShip };//class Ship
     
 class Ship{
     constructor(length, hit, sunk, name){
@@ -68,7 +68,7 @@ function addShip(x, y, board, ship, poz){ //check if it is space on the board fo
                              poz = 'vertical'
                      }
                      else if( board[x][y] != 0){
-                        poz = 'horizontal'
+                        poz = 'horizontal';
                         return;
                      }
                 }
@@ -78,7 +78,7 @@ function addShip(x, y, board, ship, poz){ //check if it is space on the board fo
                     if(board[x][y] == 0){
                         board[x][y] = ship;
                             y = y + 1;
-                            poz = 'horizontal'
+                            poz = 'horizontal';
                     }
                     else if( board[x][y] != 0){
                      //   poz = 'horizontal'
@@ -88,6 +88,11 @@ function addShip(x, y, board, ship, poz){ //check if it is space on the board fo
             }
         }
     }
+function buildShip(x, y, board, ship){
+        if ( board[x][y] == 0 || x > board.length - ship.length || y > board.length - ship.length){
+             board[x][y] = ship;
+        }
+} 
 function computerHitCordinates(board){ // computer hit on the board random
         let x = Math.floor(Math.random() * board.length);
         let y = Math.floor(Math.random() * board.length);
