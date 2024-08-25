@@ -179,6 +179,6 @@ function youHit(index){     // you shot on computer board
         copm_shiphit.textContent = yourHitCordinates(computerBoard.squares, x, y)
         arrBoard = []; 
 
-        setTimeout(updateBoard, 2500)
+        setTimeout(updateBoard, 1000)
 }
 console.log(computerBoard.squares)

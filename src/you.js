@@ -19,7 +19,7 @@ let calldialog = document.querySelector('#calldialog');
 let Okay = document.querySelector('#Okay');
 let addboat = document.querySelector('#addboat')
 const names = ['Katy', 'Jeny', 'Tom', 'Elon', 'Trump', 'Bill'];
-const colors = [ 'green', 'crimson', 'dodgeblue', 'darkorange','mediumturquoise', 'mediumseagreen', 'teal']
+const colors = [ 'green', 'crimson', 'dodgerblue', 'darkorange','mediumturquoise', 'mediumseagreen', 'teal', 'red', 'yellow']
 const poz = [ 'vertical', 'horizontal'];
 console.log(yourBoard.squares);
 
