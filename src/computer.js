@@ -97,10 +97,6 @@ const clear = document.querySelector('#clear_comp_board');
 const boardNodes = document.querySelectorAll(' div.computercontainer > div.board > div')
 const add = document.querySelector('#comp_addboats');
 
-const boardcoverChildren = document.querySelectorAll('#boardcover > div'); //board cover of computerBoard
-boardcoverChildren.forEach((div) => { // set color of computer board cover
-        div.setAttribute('style', 'background-color: aqua');
-})
 
 clear.addEventListener('click', () => { // clear computer board
                 computerBoard.squares = [];
@@ -150,15 +146,17 @@ add.addEventListener('click', () => { // add ships on board
 
 
         });
+// put a cover over computer board
+const boardcoverChildren = document.querySelectorAll('#boardcover > div'); //board cover of computerBoard
+boardcoverChildren.forEach((div) => { // set color of computer board cover
+                        div.setAttribute('style', 'background-color: aqua');
+      })
 //shoot on computer board
 boardcoverChildren.forEach((div, index) => div.addEventListener('click', (e) => { // hit a ship
         youHit(index); //hit  of computer board
         comp_shotsleft.textContent = checkShipsOnBoard(computerBoard.squares);
         div.setAttribute('style', 'background-color: transparent');
         
-}));
-arrNodelist[0].forEach((div) => div.addEventListener('mouseleave', (e) => {
-     //   div.style.backgroundColor = '';
 }));
 function youHit(index){     // you shot on computer board 
         let x = indexOfDiv(index)[0]

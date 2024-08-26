@@ -28,10 +28,8 @@ let addboat = document.querySelector('#addboat')
 const names = ['Katy', 'Jeny', 'Tom', 'Elon', 'Bear', 'Bill'];
 const colors = [ 'green', 'crimson', 'dodgerblue', 'darkorange','mediumturquoise', 'mediumseagreen', 'teal', 'red', 'yellow']
 const poz = [ 'vertical', 'horizontal'];
-console.log(yourBoard.squares);
 
-//checkShipsOnBoard(yourBoard.squares);
-addboat.addEventListener('click', () => {
+addboat.addEventListener('click', () => { // call dialog box for cordinates an ship length
            calldialog.showModal();
         });
 Okay.addEventListener('click', () => {
@@ -95,32 +93,36 @@ function updateBoard(){ // display ships on the board
     }
 updateBoard();
 
-// not more used, add ships on board by double click on the board randomly
-arrNodelist[0].forEach((div, index) => div.addEventListener('click', () => { // add ships on board
-            console.log(index); // add ships on board
-            indexOfDiv(index) // array from [0, 1] for indexes numbers from 0 to 63
-            let z = Math.floor(Math.random() * 4)
-            let x = indexOfDiv(index)[0];
-            let y = indexOfDiv(index)[1];
-            let v = Math.floor(Math.random() * 2); // poz vertical or horizontal
-            let c = Math.floor(Math.random() * 7); // color pozition
+// not more used, add ships on board by click on the board randomly
+function addShipRandom(){
+   arrNodelist[0].forEach((div, index) => div.addEventListener('click', () => { // add ships on board
+               console.log(index); // add ships on board
+               indexOfDiv(index) // array from [0, 1] for indexes numbers from 0 to 63
+               let z = Math.floor(Math.random() * 4)
+               let x = indexOfDiv(index)[0];
+               let y = indexOfDiv(index)[1];
+               let v = Math.floor(Math.random() * 2); // poz vertical or horizontal
+               let c = Math.floor(Math.random() * 7); // color pozition
+   
+               let ship = new Ship (z, 0, false, names[z]);
+               Object.defineProperty(ship, "color", {value: colors[c]}) // add color property at ship object
+               addShip(x, y, yourBoard.squares, ship, poz[v]);
+               arrBoard = []
+               updateBoard();
+               shotsleft.textContent = checkShipsOnBoard(yourBoard.squares);
+      }));
+}
+//addShipRandom(); not used now
 
-            let ship = new Ship (z, 0, false, names[z]);
-            Object.defineProperty(ship, "color", {value: colors[c]}) // add color property at ship object
-            addShip(x, y, yourBoard.squares, ship, poz[v]);
-            arrBoard = []
-            updateBoard();
-            shotsleft.textContent = checkShipsOnBoard(yourBoard.squares);
-}));
-
-// add ships on board , build ships by mouse
-function dragShips(){
+function dragShips(){  // add ships on board , build ships by mouse
     let event = false;
     let z = 1; // ship lenght
-    let c = 0 // color index
+    let c = 0 //  color index
     let n = 0; // name index in array
+    let oldx;
+    let oldy;   
     arrNodelist[0].forEach((div, index) => div.addEventListener('mousedown', (e) => {
-           //    div.style.backgroundColor = 'pink';
+               //div.style.backgroundColor = 'pink';
                //div.style.backgroundImage = iconfire;
                event = true;
                console.log(index); // add ships on board
@@ -136,6 +138,8 @@ function dragShips(){
                buildShip(x, y, yourBoard.squares, ship);
                div.style.backgroundColor = colors[c];
                z = z + 1;
+               oldx = x;
+               oldy = y;
        }));
        arrNodelist[0].forEach((div) => div.addEventListener('mouseup', (e) => {
             event = false;
@@ -143,23 +147,35 @@ function dragShips(){
             arrBoard = []
             updateBoard();   
             z = 1;
-            }));    
+            }));
        arrNodelist[0].forEach((div, index) => div.addEventListener('mouseenter', (e) => {
         if ( event == true && z < 5){
-            div.style.backgroundColor = 'pink';
+                console.log(oldx, oldy)
             let x = indexOfDiv(index)[0];
             let y = indexOfDiv(index)[1];
             let ship = new Ship (z, 0, false, names[n]);
-            Object.defineProperty(ship, "color", {value: colors[c]}) // add color property at ship object
-                buildShip(x, y, yourBoard.squares, ship);
-                z = z + 1;
+            z = z + 1;
+            Object.defineProperty(ship, "color", {value: colors[c]}) // add color property at ship object    
+            if( x == oldx){
+                  div.style.backgroundColor = 'pink';
+                  buildShip(x, y, yourBoard.squares, ship);
+        //              z = z + 1;  
+                      console.log(oldx, oldy); 
+                }
+                else if ( y == oldy){
+                        div.style.backgroundColor = 'pink';
+                        buildShip(x, y, yourBoard.squares, ship);
+                }
         }
+        oldx = x;
+        oldy = y; 
+
     }));
 }
-//dragShips(); do not used
+dragShips();  //draw ships on board by mouse
+
 const clear = document.querySelector('#clearboard');
 let boardNodes = document.querySelectorAll(' div.yourcontainer > div.board > div')
-
 clear.addEventListener('click', () => {
         yourBoard.squares = [];
         yourBoard.createBoard()
@@ -167,7 +183,6 @@ clear.addEventListener('click', () => {
         boardNodes.forEach((div, index) => {
                 div.style.backgroundColor = '';
                 div.textContent = '';
-      //          div.style.border = '1px';
                 console.log(yourBoard.squares)
         })
         shotsleft.textContent = checkShipsOnBoard(yourBoard.squares);

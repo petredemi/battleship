@@ -88,7 +88,7 @@ function addShip(x, y, board, ship, poz){ //check if it is space on the board fo
             }
         }
     }
-function buildShip(x, y, board, ship){
+function buildShip(x, y, board, ship){ // add ship on bord by mouse
         if ( board[x][y] == 0 || x > board.length - ship.length || y > board.length - ship.length){
              board[x][y] = ship;
         }
