@@ -57,6 +57,7 @@ body{
     text-align: center;
     line-height: 0.7;
     vertical-align: middle;
+   /* background-image: url('./icons/fire.png');*/
 }
 #boardcover{
     display: grid;

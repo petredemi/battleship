@@ -143,8 +143,6 @@ add.addEventListener('click', () => { // add ships on board
                 createShips(5);
                 updateBoard();
                 comp_shotsleft.textContent = checkShipsOnBoard(computerBoard.squares);
-
-
         });
 // put a cover over computer board
 const boardcoverChildren = document.querySelectorAll('#boardcover > div'); //board cover of computerBoard

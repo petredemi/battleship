@@ -25,46 +25,50 @@ module.exports = {
     }),
   ],
   module: {
-    rules: [
-     // {
-     //   test: /\.jsx?$/,
-    //    exclude: ['node_modules'],
-     //   use: ['babel-loader'],
-     // },
-      {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif|wav|mp3)$/i,
-       // use: [
-         // 'file-loader'
-     // ],
-        type: 'asset/resource',
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource',
-      },
-      {
-        test: /\.html$/i,
-        loader: "html-loader",
-      }      
-
+       rules: [
+        // {
+        //   test: /\.jsx?$/,
+       //    exclude: ['node_modules'],
+        //   use: ['babel-loader'],
+        // },
+         {
+           test: /\.css$/i,
+           use: ['style-loader', 'css-loader'],
+         },
+         {
+           test: /\.(png|svg|jpg|jpeg|gif|wav|mp3)$/i,
+           use: [
+               { 
+                   loader: 'file-loader',
+                   options: {
+                          name: '[./icons][name].[png]',
+                   }
+               },
+           ],
+       //    type: 'asset/resource',
+         },
+         {
+           test: /\.(woff|woff2|eot|ttf|otf)$/i,
+           type: 'asset/resource',
+         },
+         {
+           test: /\.html$/i,
+           loader: "html-loader",
+         }      
     ],
   },
-  resolve: {
-    alias: {
-      config$: './configs/app-config.js',
-      react: './vendor/react-master',
-    },
-    extensions: ['.js', '.jsx'],
-    modules: [
-      'node_modules',
-      'bower_components',
-      'shared',
-      '/shared/vendor/modules',
-    ],
-  },
+       resolve: {
+         alias: {
+           config$: './configs/app-config.js',
+           react: './vendor/react-master',
+         },
+         extensions: ['.js', '.jsx'],
+         modules: [
+           'node_modules',
+           'bower_components',
+           'shared',
+           '/shared/vendor/modules',
+         ],
+       },
 
 };

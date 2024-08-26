@@ -1,7 +1,9 @@
 /**@type {import('jest').Config}*/
+import _ from 'lodash';
 import './style.css';
 import {Gameboard, Ship, addShip, computerHitCordinates, indexOfDiv, checkShipsOnBoard,
         buildShip } from "./constructors.js";
+
 import sound from './sounds/explosion.mp3';
 import soundwater from './sounds/underwater-explosion.mp3'
 
@@ -63,6 +65,9 @@ function createDomYourBoard(){
         for(let i = 0; i < boardW ** 2; i++){
                 let div = document.createElement('div');
                 div.setAttribute('style', `height: 30px; width: 30px`);
+            //    div.setAttribute('style', "background-image: url('./icons/fire.png')")
+                div.style.backgroundImage = iconfire;  
+
                 div1.append(div);
         }
     }  
@@ -86,6 +91,8 @@ function updateBoard(){ // display ships on the board
                         arrNodelist[0][i].setAttribute(`style`, `border: 1px solid black; background-color: ${arrBoard[i].color}`);
                 }else if(typeof arrBoard[i] == 'string'){
                         arrNodelist[0][i].setAttribute('style', 'color: red; font-size: 40px');
+                 //       arrNodelist[0][i].style.backgroundImage = iconfire;  
+
                         arrNodelist[0][i].textContent = arrBoard[i];
                    //     arrNodelist[0][i].setAttribute('style', 'background-color: lightpink');
                 }
@@ -167,9 +174,8 @@ function dragShips(){  // add ships on board , build ships by mouse
                         buildShip(x, y, yourBoard.squares, ship);
                 }
         }
-        oldx = x;
-        oldy = y; 
-
+         //   oldx = x;
+         //   oldy = y;  
     }));
 }
 dragShips();  //draw ships on board by mouse
