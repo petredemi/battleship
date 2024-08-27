@@ -37,15 +37,15 @@ module.exports = {
          },
          {
            test: /\.(png|svg|jpg|jpeg|gif|wav|mp3)$/i,
-           use: [
-               { 
-                   loader: 'file-loader',
-                   options: {
-                          name: '[./icons][name].[png]',
-                   }
-               },
-           ],
-       //    type: 'asset/resource',
+          // use: [
+          //     { 
+          //         loader: 'file-loader',
+          //         options: {
+          //                name: '[./icons][name].[png]',
+          //         }
+          //     },
+          // ],
+           type: 'asset/resource',
          },
          {
            test: /\.(woff|woff2|eot|ttf|otf)$/i,

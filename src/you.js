@@ -65,9 +65,7 @@ function createDomYourBoard(){
         for(let i = 0; i < boardW ** 2; i++){
                 let div = document.createElement('div');
                 div.setAttribute('style', `height: 30px; width: 30px`);
-            //    div.setAttribute('style', "background-image: url('./icons/fire.png')")
                 div.style.backgroundImage = iconfire;  
-
                 div1.append(div);
         }
     }  
@@ -87,14 +85,11 @@ function updateBoard(){ // display ships on the board
         for(let i = 0 ; i < 64; i++){
                 if(typeof arrBoard[i] == 'object'){
                         arrNodelist[0][i].textContent = arrBoard[i].name;
-                      //  arrNodelist[0][i].setAttribute('style', 'border: 1px solid black');
-                        arrNodelist[0][i].setAttribute(`style`, `border: 1px solid black; background-color: ${arrBoard[i].color}`);
+                        arrNodelist[0][i].setAttribute(`style`, `border: 1px solid; background-color: ${arrBoard[i].color}`);
                 }else if(typeof arrBoard[i] == 'string'){
                         arrNodelist[0][i].setAttribute('style', 'color: red; font-size: 40px');
-                 //       arrNodelist[0][i].style.backgroundImage = iconfire;  
-
+                        arrNodelist[0][i].style.backgroundImage = iconfire;  
                         arrNodelist[0][i].textContent = arrBoard[i];
-                   //     arrNodelist[0][i].setAttribute('style', 'background-color: lightpink');
                 }
            }
     }
@@ -147,12 +142,14 @@ function dragShips(){  // add ships on board , build ships by mouse
                z = z + 1;
                oldx = x;
                oldy = y;
+               
        }));
        arrNodelist[0].forEach((div) => div.addEventListener('mouseup', (e) => {
             event = false;
             n = 0
             arrBoard = []
-            updateBoard();   
+            updateBoard();
+            shotsleft.textContent = checkShipsOnBoard(yourBoard.squares);  
             z = 1;
             }));
        arrNodelist[0].forEach((div, index) => div.addEventListener('mouseenter', (e) => {

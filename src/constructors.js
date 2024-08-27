@@ -101,10 +101,10 @@ function computerHitCordinates(board){ // computer hit on the board random
                 board[x][y].length = board[x][y].length - 1;
                 board[x][y].hit = board[x][y].hit + 1;
                 board[x][y].isSunk();
-                board[x][y] = 'X'; 
+                board[x][y] = '🔥'; 
                 return computer_hit;          
             }else{
-                board[x][y] = 'O';
+                board[x][y] = '🫧';
             }
         }
 function yourHitCordinates(board, x, y){
@@ -113,10 +113,10 @@ function yourHitCordinates(board, x, y){
             board[x][y].length = board[x][y].length - 1;
             board[x][y].hit = board[x][y].hit + 1;
             board[x][y].isSunk();
-            board[x][y] = 'X';
+            board[x][y] = '🔥';
             return your_hit;
         }else{
-           board[x][y] = 'O';
+           board[x][y] = '🫧';
         }
     }
 function indexOfDiv(n){ // find div index of tile on the bord, 
