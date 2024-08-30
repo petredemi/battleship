@@ -64,7 +64,6 @@ function createDomYourBoard(){
         div1.setAttribute('style', `grid-template-columns: repeat(${boardW},  50px)`);
         for(let i = 0; i < boardW ** 2; i++){
                 let div = document.createElement('div');
-                div.setAttribute('style', `height: 30px; width: 30px`);
                 div.style.backgroundImage = iconfire;  
                 div1.append(div);
         }

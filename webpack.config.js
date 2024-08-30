@@ -9,7 +9,6 @@ module.exports = {
     test: './src/battleship.test.js',
     you : './src/you.js',
     computer: './src/computer.js',
-    createdom: './src/createdom.js'
   },
   output: {
     filename: '[name].bundle.js',

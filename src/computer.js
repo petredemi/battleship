@@ -19,10 +19,6 @@ iconfire.src = fire;
 iconcircle.src = circle;   
 iconbullseye.src = bullseye;
 
-//console.log(iconfire);
-//console.log(iconcircle);
-
-//document.body.style.backgroundImage = iconfire;    
 let boardH = 8;
 let boardW = 8
 let computerBoard =  new Gameboard(boardH, boardW);
@@ -49,7 +45,6 @@ function createShips(n){
 createShips(2);
 function createDomComputerBoard(){
         const computer_board = document.querySelector( '#computerboard');
-   //     const boardcover = document.querySelector('#boardcover');
         const div0 = document.createElement('div');
         const div1 = document.createElement('div');
         div0.classList.add('computercontainer');
@@ -59,10 +54,6 @@ function createDomComputerBoard(){
         div1.setAttribute('style', `grid-template-columns: repeat(${boardH},  50px)`);
         for(let i = 0; i < boardH ** 2; i++){
                 let div = document.createElement('div');
-                div.setAttribute('style', `height: 30px; width: 30px;`);
-              //  div.style.backgroundImage = `url(${iconfire})`
-//                div.setAttribute('style', `background-image: src('${iconfire}')`);
-            //    div.style.backgroundImage = iconfire;
                 div1.append(div);
         }
 }
@@ -176,4 +167,3 @@ function youHit(index){     // you shot on computer board
 
         setTimeout(updateBoard, 1000)
 }
-console.log(computerBoard.squares)
