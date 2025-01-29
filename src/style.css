@@ -159,6 +159,12 @@ ul{
     border: 1px solid red;
 
 }
+@media( max-width: 450px){
+    .container{
+        scale: 0.9;
+    };
+
+}
 /*.board > div{
     background-image: url('./icons/fire.png');
 }*/

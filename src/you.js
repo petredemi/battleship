@@ -4,8 +4,8 @@ import './style.css';
 import {Gameboard, Ship, addShip, computerHitCordinates, indexOfDiv, checkShipsOnBoard,
         buildShip } from "./constructors.js";
 
-import sound from './sounds/explosion.mp3';
-import soundwater from './sounds/underwater-explosion.mp3'
+import sound from './sounds/bomb-drop-impact.wav';
+import soundwater from './sounds/fire-explosion.wav'
 
 import fire from './icons/fire.png'
 import circle from './icons/circle.png';
