@@ -4,7 +4,21 @@ import './style.css';
 import circle from './icons/circle.png';
 import bullseye from './icons/bullseye.png';
 
+let sound = true;
+const soundbtn = document.querySelector('.settings > button')
+soundbtn.addEventListener('click', (e) => {
+    if(sound){
+        soundbtn.textContent = 'on'
+        soundbtn.style.backgroundColor = 'red'
+        sound = false
+    }else{
+        soundbtn.textContent = 'off'
+        soundbtn.style.backgroundColor = 'green';
+        sound = true;
+    }
 
+    console.log('hi')
+})
 const iconcircle = new Image();
 const iconbullseye = new Image();
 iconcircle.src = circle;   

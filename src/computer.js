@@ -9,7 +9,7 @@ import underwatersound from './sounds/underwater-explosion.mp3'
 const iconfire = new Image();
 const iconcircle = new Image();
 const iconbullseye = new Image();
-
+let soundbtn = document.querySelector('.settings > button');
 
 const soundboom = new Audio(explosion);
 const underwaterexplosion = new Audio(underwatersound) 
@@ -152,11 +152,15 @@ function youHit(index){     // you shot on computer board
       function delay(){
 
               if( typeof computerBoard.squares[x][y] == 'object'){
-                      soundboom.currentTime = 0;
-                      soundboom.play();
+                      if(soundbtn.textContent == 'on'){
+                                soundboom.currentTime = 0;
+                                soundboom.play();
+                      }
                 }else{
-                     underwaterexplosion.currentTime = 0;
-                     underwaterexplosion.play()
+                   if(soundbtn.textContent == 'on'){
+                        underwaterexplosion.currentTime = 0;
+                        underwaterexplosion.play()
+                   }
                 }
          }
         delay();

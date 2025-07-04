@@ -10,6 +10,26 @@ body{
     margin: 3px;
 
 }
+.settings{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+    height: 1.4rem;
+}
+.settings > button{
+    height: 1.2rem;
+    width: 2rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-right: 10px;
+    padding-bottom: 2px;
+    padding-top: 1px;
+    background-color: forestgreen;
+}
 #yourboard{
     display: flex;
     flex-direction: column;

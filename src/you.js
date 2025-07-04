@@ -19,7 +19,9 @@ const soundunderwater = new Audio(soundwater)
 const boardH = 8;
 const boardW = 8;
 const yourBoard =  new Gameboard(boardH, boardW);
-        yourBoard.createBoard();
+let soundbtn = document.querySelector('.settings > button');
+
+yourBoard.createBoard();
 let xrow = document.querySelector('#xrow');
 let ycolumn = document.querySelector('#ycolumn'); 
 let zlength = document.querySelector('#zlength');
@@ -197,11 +199,15 @@ shoot.addEventListener('click', () => {
         setTimeout(delay, 1000);
         function delay(){
                 if ( shiphit.textContent != ''){
+                  if(soundbtn.textContent == 'on'){
                         soundexplosion.currentTime = 0;
                         soundexplosion.play();
+                  }
                 }else {
+                   if(soundbtn.textContent == 'on'){
                         soundunderwater.currentTime = 0;
                         soundunderwater.play();
+                   }
                 }        
         }
         arrBoard = [];
